@@ -1,0 +1,20 @@
+version: '3'
+services:
+  ner:
+    volumes:
+     - /home/suijhin/tagalys/NER:/workspace
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+     - 5001:5001
+     - 8889:8889
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
